@@ -56,24 +56,34 @@ function Parse-Arguments {
 
     for ($i = 0; $i -lt $Arguments.Length; $i++) {
         switch ($Arguments[$i]) {
-            "-h", "--help" {
+            "-h" {
                 Show-Help
                 exit
             }
-            "-a", "--accept-license" {
-                $ACCEPT_LICENSE = $true
+            "--help" {
+                Show-Help
+                exit
             }
-            "-t", "--trust-repository" {
-                $TRUST_REPOSITORY = $true
+            "-a" {
+                $script:ACCEPT_LICENSE = $true
+            }
+            "--accept-license" {
+                $script:ACCEPT_LICENSE = $true
+            }
+            "-t" {
+                $script:TRUST_REPOSITORY = $true
+            }
+            "--trust-repository" {
+                $script:TRUST_REPOSITORY = $true
             }
             "--check" {
-                $CHECK = $true
+                $script:CHECK = $true
             }
             "--rdfind" {
-                $RDFIND = "1"
+                $script:RDFIND = "1"
             }
             "--no-rdfind" {
-                $RDFIND = "0"
+                $script:RDFIND = "0"
             }
             default {
                 Show-Help
@@ -82,6 +92,7 @@ function Parse-Arguments {
         }
     }
 }
+
 
 function Ask-For-License {
     if ($ACCEPT_LICENSE -or ($PROPS["agree_license"] -eq "yes")) {
